@@ -1,5 +1,8 @@
 package com.example.list.simplelistview;
 
+import android.app.NotificationManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,6 +45,18 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Position : "+ position + "ListView : "+ (String)listView.getItemAtPosition(position),Toast.LENGTH_SHORT)
                         .show();
+
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
+                        .setContentTitle(getText(R.string.app_name))
+                        .setContentText("Position : "+ position + "\nListView : "+ (String)listView.getItemAtPosition(position))
+                        .setSmallIcon(R.drawable.ic_notify);
+
+                int notificationId = 1;
+
+                NotificationManager mgr = (NotificationManager) getSystemService(
+                        NOTIFICATION_SERVICE);
+                mgr.notify(notificationId,builder.build());
+
             }
         });
 
