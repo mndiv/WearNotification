@@ -45,16 +45,23 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Position : "+ position + "ListView : "+ (String)listView.getItemAtPosition(position),Toast.LENGTH_SHORT)
                         .show();
+                String text = "This is a simple listview , when clicked on handheld device, " +
+                        "the notification is sent to android wear. Now the list item clicked is " + (String)listView.getItemAtPosition(position);
+
+                NotificationCompat.BigTextStyle bigTextStyle =
+                        new NotificationCompat.BigTextStyle();
+
+                bigTextStyle.bigText(text);
+
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
                         .setContentTitle(getText(R.string.app_name))
-                        .setContentText("Position : "+ position + "\nListView : "+ (String)listView.getItemAtPosition(position))
+                        .setStyle(bigTextStyle)
                         .setSmallIcon(R.drawable.ic_notify);
 
                 int notificationId = 1;
 
-                NotificationManager mgr = (NotificationManager) getSystemService(
-                        NOTIFICATION_SERVICE);
+                NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 mgr.notify(notificationId,builder.build());
 
             }
